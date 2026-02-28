@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Корзина - Nail Studio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* Дополнительные стили для страницы корзины */
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <img src="./kkk_log.png" width="45" alt="" />
+          <h1>Nail<span>Studio</span></h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="index.html#services">Услуги</a></li>
+            <li><a href="index.html#about">О нас</a></li>
+            <li><a href="index.html#contact">Контакты</a></li>
+            <li class="cart-icon">
+              <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+              <span class="cart-count">2</span>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section class="cart-page">
+      <div class="container">
+        <h1>Ваша корзина</h1>
+
+        <div class="cart-container">
+          <div class="cart-header">
+            <div>Услуга</div>
+            <div>Цена</div>
+            <div>Количество</div>
+            <div>Сумма</div>
+            <div></div>
+          </div>
+
+          <!-- Пример товара в корзине -->
+          <div class="cart-item">
+            <div class="cart-item-info">
+              <img
+                src="./lack.jpg"
+                alt="Покрытие гель-лак"
+                class="cart-item-img"
+              />
+              <div>
+                <div class="cart-item-name">Покрытие гель-лак</div>
+                <div class="cart-item-desc">Долговременное покрытие</div>
+              </div>
+            </div>
+            <div class="cart-item-price">1200 руб.</div>
+            <div class="quantity-control">
+              <button class="quantity-btn">-</button>
+              <span class="quantity">1</span>
+              <button class="quantity-btn">+</button>
+            </div>
+            <div class="cart-item-price">1200 руб.</div>
+            <div>
+              <button class="remove-item">&times;</button>
+            </div>
+          </div>
+
+          <!-- Второй пример товара -->
+          <div class="cart-item">
+            <div class="cart-item-info">
+              <img src="./pe.jpg" alt="Педикюр" class="cart-item-img" />
+              <div>
+                <div class="cart-item-name">Педикюр</div>
+                <div class="cart-item-desc">Профессиональный уход</div>
+              </div>
+            </div>
+            <div class="cart-item-price">2000 руб.</div>
+            <div class="quantity-control">
+              <button class="quantity-btn">-</button>
+              <span class="quantity">1</span>
+              <button class="quantity-btn">+</button>
+            </div>
+            <div class="cart-item-price">2000 руб.</div>
+            <div>
+              <button class="remove-item">&times;</button>
+            </div>
+          </div>
+
+          <div class="cart-summary">
+            <div class="cart-total">
+              Итого: <span class="total-price">3200</span> руб.
+            </div>
+            <button class="checkout-btn">Оформить запись</button>
+          </div>
+
+          <a href="index.html#services" class="continue-shopping">
+            <i class="fas fa-arrow-left"></i> Продолжить выбор услуг
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer style="margin-top: 80px">
+      <div class="container">
+        <p>&copy; 2025 NailStudio. Все права защищены.</p>
+        <div class="social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-vk"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

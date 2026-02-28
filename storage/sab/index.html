@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nail Studio - Салон ногтевого сервиса</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <img src="./kkk_log.png" width="45" alt="" />
+          <h1>Nail<span>Studio</span></h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#contact">Контакты</a></li>
+            <li class="cart-icon">
+              <a href="./cart.html"><i class="fas fa-shopping-cart"></i></a>
+              <span class="cart-count">0</span>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section id="home" class="hero">
+      <div class="container">
+        <h2>Профессиональный уход за вашими ногтями</h2>
+        <p>Мы создаем красоту и уход для ваших рук и ног</p>
+        <a href="#services" class="btn">Наши услуги</a>
+      </div>
+    </section>
+
+    <section id="services" class="services">
+      <div class="container">
+        <h2>Наши услуги</h2>
+        <div class="services-grid">
+          <div
+            class="service-item"
+            data-id="1"
+            data-name="Маникюр"
+            data-price="1500"
+          >
+            <img
+              src="./f7db7e8908d46788e5e78d0c87296f5243163b32_original.jpeg"
+              alt="Маникюр"
+            />
+            <h3>Маникюр</h3>
+            <p>Классический, аппаратный или комбинированный маникюр</p>
+            <p class="price">1500 руб.</p>
+            <button class="add-to-cart">Добавить в корзину</button>
+          </div>
+          <div
+            class="service-item"
+            data-id="2"
+            data-name="Педикюр"
+            data-price="2000"
+          >
+            <img src="./pe.jpg" alt="Педикюр" />
+            <h3>Педикюр</h3>
+            <p>Профессиональный уход за стопами и ногтями ног</p>
+            <p class="price">2000 руб.</p>
+            <button class="add-to-cart">Добавить в корзину</button>
+          </div>
+          <div
+            class="service-item"
+            data-id="3"
+            data-name="Покрытие гель-лак"
+            data-price="1200"
+          >
+            <img src="./lack.jpg" alt="Гель-лак" />
+            <h3>Покрытие гель-лак</h3>
+            <p>Долговременное покрытие с выбором из 100+ цветов</p>
+            <p class="price">1200 руб.</p>
+            <button class="add-to-cart">Добавить в корзину</button>
+          </div>
+          <div
+            class="service-item"
+            data-id="4"
+            data-name="Наращивание"
+            data-price="3000"
+          >
+            <img src="./narsh.jpg" alt="Наращивание" />
+            <h3>Наращивание ногтей</h3>
+            <p>Наращивание гелем или акрилом любой сложности</p>
+            <p class="price">3000 руб.</p>
+            <button class="add-to-cart">Добавить в корзину</button>
+          </div>
+          <div
+            class="service-item"
+            data-id="5"
+            data-name="Дизайн ногтей"
+            data-price="500"
+          >
+            <img src="./dizain.jpg" alt="Дизайн" />
+            <h3>Дизайн ногтей</h3>
+            <p>Художественный дизайн одной ногтевой пластины</p>
+            <p class="price">500 руб.</p>
+            <button class="add-to-cart">Добавить в корзину</button>
+          </div>
+          <div
+            class="service-item"
+            data-id="6"
+            data-name="SPA для рук"
+            data-price="2500"
+          >
+            <img src="./spa.jpg" alt="SPA" />
+            <h3>SPA для рук</h3>
+            <p>Комплексный уход с массажем и питательными масками</p>
+            <p class="price">2500 руб.</p>
+            <button class="add-to-cart">Добавить в корзину</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cart" class="cart-modal">
+      <div class="cart-content">
+        <span class="close-cart">&times;</span>
+        <h2>Ваша корзина</h2>
+        <div class="cart-items">
+          <!-- Тут будут добавляться товары -->
+        </div>
+        <div class="cart-total">
+          <strong>Итого: <span class="total-price">0</span> руб.</strong>
+        </div>
+        <button class="checkout-btn">Оформить запись</button>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container">
+        <h2>О нашем салоне</h2>
+        <p>
+          NailStudio - это современный салон ногтевого сервиса, где работают
+          только профессиональные мастера с многолетним опытом. Мы используем
+          качественные материалы и стерильные инструменты, чтобы обеспечить
+          безопасность и комфорт наших клиентов.
+        </p>
+        <p>
+          Наша миссия - делать вас красивыми и уверенными в себе с помощью
+          безупречного маникюра и педикюра.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>Контакты</h2>
+        <div class="contact-info">
+          <div>
+            <i class="fas fa-map-marker-alt"></i>
+            <p>г. Уфа, ул. Красивых Ногтей, д. 77</p>
+          </div>
+          <div>
+            <i class="fas fa-phone"></i>
+            <p>+7 (987) 123-45-67</p>
+          </div>
+          <div>
+            <i class="fas fa-envelope"></i>
+            <p>info@nailstudio.ru</p>
+          </div>
+          <div>
+            <i class="fas fa-clock"></i>
+            <p>Ежедневно с 10:00 до 21:00</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 NailStudio. Все права защищены.</p>
+        <div class="social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-vk"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
