@@ -28,10 +28,6 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->label('Пользователь')
-                    ->relationship('user', 'name')
-                    ->required(),
                 Forms\Components\Select::make('status')
                     ->label('Статус')
                     ->options([
@@ -41,7 +37,8 @@ class OrderResource extends Resource
                         OrderStatus::COMPLETED->value => OrderStatus::COMPLETED->value,
                         OrderStatus::CANCELLED->value => OrderStatus::CANCELLED->value,
                     ])
-                    ->required(),
+                    ->required()
+                    ->default(OrderStatus::NEW->value),
                 Forms\Components\DateTimePicker::make('ready_at')
                     ->label('Готовность'),
                 Forms\Components\TextInput::make('total_price')
@@ -65,12 +62,12 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('status')
                     ->label('Статус')
                     ->badge()
-                    ->color(fn (OrderStatus $state): string => match ($state) {
-                        OrderStatus::NEW => 'warning',
-                        OrderStatus::IN_PROGRESS => 'info',
-                        OrderStatus::READY => 'success',
-                        OrderStatus::COMPLETED => 'gray',
-                        OrderStatus::CANCELLED => 'danger',
+                    ->color(fn (string $state): string => match ($state) {
+                        OrderStatus::NEW->value => 'gray',
+                        OrderStatus::IN_PROGRESS->value => 'warning',
+                        OrderStatus::READY->value => 'info',
+                        OrderStatus::COMPLETED->value => 'success',
+                        OrderStatus::CANCELLED->value => 'danger',
                     }),
                 Tables\Columns\TextColumn::make('ready_at')
                     ->label('Готовность')
@@ -86,15 +83,7 @@ class OrderResource extends Resource
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                Tables\Filters\SelectFilter::make('status')
-                    ->label('Статус')
-                    ->options([
-                        OrderStatus::NEW->value => OrderStatus::NEW->value,
-                        OrderStatus::IN_PROGRESS->value => OrderStatus::IN_PROGRESS->value,
-                        OrderStatus::READY->value => OrderStatus::READY->value,
-                        OrderStatus::COMPLETED->value => OrderStatus::COMPLETED->value,
-                        OrderStatus::CANCELLED->value => OrderStatus::CANCELLED->value,
-                    ]),
+                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
