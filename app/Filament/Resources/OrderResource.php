@@ -66,10 +66,10 @@ class OrderResource extends Resource
                     ->label('Статус')
                     ->badge()
                     ->color(fn (OrderStatus $state): string => match ($state) {
-                        OrderStatus::NEW => 'gray',
-                        OrderStatus::IN_PROGRESS => 'warning',
-                        OrderStatus::READY => 'info',
-                        OrderStatus::COMPLETED => 'success',
+                        OrderStatus::NEW => 'warning',
+                        OrderStatus::IN_PROGRESS => 'info',
+                        OrderStatus::READY => 'success',
+                        OrderStatus::COMPLETED => 'gray',
                         OrderStatus::CANCELLED => 'danger',
                     }),
                 Tables\Columns\TextColumn::make('ready_at')
@@ -86,7 +86,15 @@ class OrderResource extends Resource
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('status')
+                    ->label('Статус')
+                    ->options([
+                        OrderStatus::NEW->value => OrderStatus::NEW->value,
+                        OrderStatus::IN_PROGRESS->value => OrderStatus::IN_PROGRESS->value,
+                        OrderStatus::READY->value => OrderStatus::READY->value,
+                        OrderStatus::COMPLETED->value => OrderStatus::COMPLETED->value,
+                        OrderStatus::CANCELLED->value => OrderStatus::CANCELLED->value,
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
