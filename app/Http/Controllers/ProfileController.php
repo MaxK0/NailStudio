@@ -8,7 +8,12 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $orders = auth()->user()->orders()->with('items.service')->orderBy('created_at', 'desc')->get();
+        $orders = auth()
+            ->user()
+            ->orders()
+            ->with('items.service')
+            ->orderBy('created_at', 'desc')
+            ->get();
         return view('profile', compact('orders'));
     }
 }

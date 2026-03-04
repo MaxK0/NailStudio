@@ -25,11 +25,15 @@ Route::middleware('guest')->group(function () {
 
 // Маршруты корзины (только для авторизованных пользователей)
 Route::middleware(['auth'])->group(function () {
-    Route::get('/cart', [CartController::class, 'index'])->name('cart');
-    Route::post('/cart/add/{service}', [CartController::class, 'add'])->name('cart.add');
-    Route::patch('/cart/update/{cartItem}', [CartController::class, 'update'])->name('cart.update');
-    Route::delete('/cart/remove/{cartItem}', [CartController::class, 'remove'])->name('cart.remove');
-    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::prefix('cart')->name('cart.')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::post('/add/{serviceId}', [CartController::class, 'add'])->name('add');
+        Route::patch('/update/{id}', [CartController::class, 'update'])->name('update');
+        Route::delete('/remove/{id}', [CartController::class, 'remove'])->name('remove');
+        Route::patch('/{id}/update-employee-time', [CartController::class, 'updateEmployeeAndTime'])->name('update.employee.time');
+        Route::get('/busy-slots', [CartController::class, 'getBusySlots'])->name('busy-slots');
+        Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
+    });
 
     // Профиль пользователя
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');

@@ -39,8 +39,6 @@ class OrderResource extends Resource
                     ])
                     ->required()
                     ->default(OrderStatus::NEW->value),
-                Forms\Components\DateTimePicker::make('ready_at')
-                    ->label('Готовность'),
                 Forms\Components\TextInput::make('total_price')
                     ->label('Общая сумма')
                     ->required()
@@ -69,10 +67,6 @@ class OrderResource extends Resource
                         OrderStatus::COMPLETED->value => 'success',
                         OrderStatus::CANCELLED->value => 'danger',
                     }),
-                Tables\Columns\TextColumn::make('ready_at')
-                    ->label('Готовность')
-                    ->dateTime()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('total_price')
                     ->label('Общая сумма')
                     ->money('RUB'),

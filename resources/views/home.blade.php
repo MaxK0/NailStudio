@@ -3,10 +3,10 @@
 @section('title', 'Nail Studio - Главная')
 
 @section('content')
-    <section id="home" class="hero">
+    <section class="hero">
         <div class="container">
-            <h2>Профессиональный уход за вашими ногтями</h2>
-            <p>Мы создаем красоту и уход для ваших рук и ног</p>
+            <h2>Добро пожаловать в Nail Studio</h2>
+            <p>Профессиональный уход за вашими ногтями</p>
             <a href="#services" class="btn">Наши услуги</a>
         </div>
     </section>
@@ -17,59 +17,52 @@
             <div class="services-grid">
                 @foreach($services as $service)
                     <div class="service-item">
-                        <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" />
+                        <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}">
                         <h3>{{ $service->name }}</h3>
                         <p>{{ $service->description }}</p>
-                        <p class="price">{{ number_format($service->price, 0, '', ' ') }} руб.</p>
-                        @guest
-                            <a href="{{ route('login') }}" class="add-to-cart">Добавить в корзину</a>
-                        @else
-                            <form action="{{ route('cart.add', $service->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="add-to-cart">Добавить в корзину</button>
-                            </form>
-                        @endguest
+                        <div class="price">
+                            @if($service->servicePrices->isNotEmpty())
+                                {{ number_format($service->min_price, 0, '', ' ') }} - {{ number_format($service->max_price, 0, '', ' ') }} руб.
+                            @else
+                                {{ number_format($service->price, 0, '', ' ') }} руб.
+                            @endif
+                        </div>
+                        <div class="duration">
+                            <i class="far fa-clock"></i> {{ $service->duration }} мин.
+                        </div>
+                        <form action="{{ route('cart.add', $service->id) }}" method="POST">
+                            @csrf
+                            <input type="number" name="quantity" value="1" min="1" class="quantity-input" style="display: none;">
+                            <button type="submit" class="add-to-cart">Добавить в корзину</button>
+                        </form>
                     </div>
                 @endforeach
             </div>
         </div>
     </section>
 
-    <section id="about" class="about">
+    <section class="about">
         <div class="container">
-            <h2>О нашем салоне</h2>
-            <p>
-                NailStudio - это современный салон ногтевого сервиса, где работают
-                только профессиональные мастера с многолетним опытом. Мы используем
-                качественные материалы и стерильные инструменты, чтобы обеспечить
-                безопасность и комфорт наших клиентов.
-            </p>
-            <p>
-                Наша миссия - делать вас красивыми и уверенными в себе с помощью
-                безупречного маникюра и педикюра.
-            </p>
+            <h2>О нас</h2>
+            <p>Nail Studio - это современный салон красоты, специализирующийся на ногтевом сервисе. Наши мастера - профессионалы с многолетним опытом работы, которые постоянно совершенствуют свои навыки и следят за последними тенденциями в индустрии красоты.</p>
         </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section class="contact">
         <div class="container">
             <h2>Контакты</h2>
             <div class="contact-info">
                 <div>
                     <i class="fas fa-map-marker-alt"></i>
-                    <p>г. Уфа, ул. Красивых Ногтей, д. 77</p>
+                    <p>г. Москва, ул. Примерная, д. 1</p>
                 </div>
                 <div>
                     <i class="fas fa-phone"></i>
-                    <p>+7 (987) 123-45-67</p>
+                    <p>+7 (999) 999-99-99</p>
                 </div>
                 <div>
                     <i class="fas fa-envelope"></i>
                     <p>info@nailstudio.ru</p>
-                </div>
-                <div>
-                    <i class="fas fa-clock"></i>
-                    <p>Ежедневно с 10:00 до 21:00</p>
                 </div>
             </div>
         </div>

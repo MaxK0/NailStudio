@@ -22,7 +22,6 @@ body {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
 }
 
 .btn {
@@ -73,24 +72,108 @@ header .container {
     color: #ff6b9d;
 }
 
-nav ul {
+/* Десктопное меню */
+.desktop-nav {
+    display: block;
+}
+
+.desktop-nav ul {
     display: flex;
     list-style: none;
 }
 
-nav ul li {
+.desktop-nav ul li {
     margin-left: 30px;
     position: relative;
 }
 
-nav ul li a {
+.desktop-nav ul li a {
     text-decoration: none;
     color: #333;
     font-weight: 500;
     transition: color 0.3s;
 }
 
-nav ul li a:hover {
+.desktop-nav ul li a:hover {
+    color: #ff6b9d;
+}
+
+/* Мобильное меню */
+.burger-menu {
+    display: none;
+}
+
+.burger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.burger-icon span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #333;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+.burger-icon.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.burger-icon.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-icon.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-150%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+}
+
+.mobile-nav.active {
+    transform: translateY(0);
+}
+
+.mobile-nav ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 20px;
+}
+
+.mobile-nav ul li {
+    margin-bottom: 15px;
+}
+
+.mobile-nav ul li:last-child {
+    margin-bottom: 0;
+}
+
+.mobile-nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+    display: block;
+    padding: 10px 0;
+}
+
+.mobile-nav ul li a:hover {
     color: #ff6b9d;
 }
 
@@ -100,7 +183,7 @@ nav ul li a:hover {
 
 .cart-count {
     position: absolute;
-    top: -10px;
+    top: 15px;
     right: -10px;
     background: #ff6b9d;
     color: #fff;
@@ -486,19 +569,29 @@ footer .container {
     padding-left: 20px;
 }
 
-
 /* Адаптивность */
+@media (max-width: 992px) {
+    .cart-header,
+    .cart-item {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+    }
+
+    .cart-item-price:nth-child(2) {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     header .container {
-        flex-direction: column;
+        flex-direction: row;
     }
 
-    nav ul {
-        margin-top: 15px;
+    .desktop-nav {
+        display: none;
     }
 
-    nav ul li {
-        margin-left: 15px;
+    .burger-menu {
+        display: block;
     }
 
     .hero h2 {
@@ -509,15 +602,126 @@ footer .container {
         font-size: 18px;
     }
 
-    footer .container {
-        flex-direction: column;
+    .services-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
 
-    .social {
-        margin-top: 15px;
+    .cart-header,
+    .cart-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .cart-item-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cart-item-img {
+        width: 100%;
+        height: 150px;
+        margin-bottom: 10px;
+    }
+
+    .cart-item-info div {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .cart-item-price {
+        margin: 5px 0;
+    }
+
+    .quantity-control {
+        margin: 10px 0;
+    }
+
+    .cart-summary {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .checkout-btn {
+        max-width: 100%;
+    }
+
+    .orders-table {
+        font-size: 14px;
+        display: block;
+    }
+
+    .orders-table th,
+    .orders-table td {
+        padding: 10px 5px;
+    }
+
+    .employees-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .slots-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
     }
 }
 
+@media (max-width: 480px) {
+    .hero h2 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .services h2 {
+        font-size: 28px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cart-page h1 {
+        font-size: 28px;
+    }
+
+    .cart-header {
+        display: none;
+    }
+
+    .cart-item {
+        border-bottom: 2px solid #eee;
+        padding-bottom: 20px;
+    }
+
+    .cart-item-info {
+        width: 100%;
+    }
+
+    .cart-item-img {
+        width: 100%;
+        height: 200px;
+    }
+
+    .orders-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .employees-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .slots-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .auth-form {
+        padding: 30px 0 0 0;
+    }
+}
+
+/* Стили для страницы корзины */
 .cart-page {
     padding: 100px 0 80px;
 }
@@ -658,14 +862,13 @@ footer .container {
     color: #ff6b9d;
     text-decoration: none;
     font-weight: 600;
+    background: none;
 }
 
 .empty-cart {
     text-align: center;
     padding: 50px 0;
 }
-
-
 
 .empty-cart p {
     margin-bottom: 20px;
@@ -694,7 +897,8 @@ footer .container {
     border-collapse: collapse;
     background-color: #fff;
     border: 2px solid #ff6b9d;
-    overflow: hidden;
+    min-width: 300px;
+    overflow-x: scroll;
     box-shadow: 0 0 20px rgba(255, 107, 157, 0.2);
 }
 
@@ -788,14 +992,264 @@ footer .container {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 20px;
-    background-color: #ff6b9d;
-    color: white;
+    color: #ff6b9d;
     text-decoration: none;
     transition: background-color 0.3s;
 }
 
 .continue-shopping:hover {
+    color: #ff5a8e;
+}
+
+/* Стили для карточек услуг */
+.duration {
+    padding: 0 15px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.duration i {
+    margin-right: 5px;
+}
+
+/* Стили для блока выбора сотрудника и времени */
+.cart-employee-selection {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart-employee-selection h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 18px;
+}
+
+.employees-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.employee-option {
+    position: relative;
+}
+
+.employee-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.employee-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.employee-card:hover {
+    border-color: #ddd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.employee-option input[type="radio"]:checked + .employee-card {
+    border-color: #ff6b9d;
+    background-color: rgba(255, 107, 157, 0.05);
+}
+
+.employee-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.employee-info {
+    text-align: center;
+}
+
+.employee-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.employee-category {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.employee-price {
+    font-weight: 600;
+    color: #ff6b9d;
+}
+
+.appointment-date {
+    margin-bottom: 20px;
+}
+
+.appointment-date label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.appointment-date input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.appointment-time {
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.time-slot {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.time-slot:hover {
+    background-color: #f0f0f0;
+}
+
+.time-slot.selected {
+    background-color: #ff6b9d;
+    color: white;
+    border-color: #ff6b9d;
+}
+
+.time-slot.busy {
+    background-color: #f0f0f0;
+    color: #999;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.update-employee-time-form {
+    margin-top: 20px;
+}
+
+.update-btn {
+    padding: 10px 20px;
+    background-color: #ff6b9d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.update-btn:hover {
     background-color: #ff5a8e;
 }
 
+
+
+.btn-primary {
+    background-color: #ff6b9d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #e0558b;
+}
+
+/* Стили для списка заказов */
+.order-employees, .order-times {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.order-employees li, .order-times li {
+    margin-bottom: 5px;
+}
+
+.order-employees li:last-child, .order-times li:last-child {
+    margin-bottom: 0;
+}
+
+/* Стили для выбора времени */
+.time-slots {
+    margin-top: 15px;
+}
+
+.slots-container {
+    margin-top: 10px;
+}
+
+.slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.time-slot {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.time-slot:hover:not(.busy) {
+    background-color: #f0f0f0;
+}
+
+.time-slot.busy {
+    background-color: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.time-slot.selected {
+    background-color: #ff6b9d;
+    color: #fff;
+    border-color: #ff6b9d;
+}
+
+.loading, .no-slots, .error {
+    padding: 10px;
+    text-align: center;
+    color: #666;
+}
+
+.error {
+    color: #d32f2f;
+}

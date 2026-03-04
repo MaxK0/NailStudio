@@ -21,10 +21,11 @@
                         <tr>
                             <th>Номер заказа</th>
                             <th>Услуги</th>
+                            <th>Мастер</th>
+                            <th>Дата и время</th>
                             <th>Статус</th>
                             <th>Сумма</th>
                             <th>Дата создания</th>
-                            <th>Дата оказания услуги</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,19 +40,38 @@
                                     </ul>
                                 </td>
                                 <td>
+                                    <ul class="order-employees">
+                                        @foreach($order->items as $item)
+                                            <li>
+                                                @if($item->employee)
+                                                    {{ $item->employee->name }} ({{ $item->employee->category->name }})
+                                                @else
+                                                    Не назначен
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="order-times">
+                                        @foreach($order->items as $item)
+                                            <li>
+                                                @if($item->appointment_time)
+                                                    {{ $item->appointment_time->format('d.m.Y H:i') }}
+                                                @else
+                                                    Не назначено
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                                <td>
                                 <span class="status-badge status-{{ \Illuminate\Support\Str::slug($order->status) }}">
                                     {{ $order->status }}
                                 </span>
                                 </td>
                                 <td>{{ number_format($order->total_price, 0, '', ' ') }} руб.</td>
                                 <td>{{ $order->created_at->format('d.m.Y H:i') }}</td>
-                                <td>
-                                    @if($order->ready_at)
-                                        {{ $order->ready_at->format('d.m.Y H:i') }}
-                                    @else
-                                        -
-                                    @endif
-                                </td>
                             </tr>
                         @endforeach
                         </tbody>

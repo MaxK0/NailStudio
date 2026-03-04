@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ServiceResource\Pages;
+use App\Filament\Resources\ServiceResource\RelationManagers\PricesRelationManager;
 use App\Models\Service;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -14,13 +15,13 @@ class ServiceResource extends Resource
 {
     protected static ?string $model = Service::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
     protected static ?string $navigationLabel = 'Услуги';
 
     protected static ?string $modelLabel = 'Услуга';
 
     protected static ?string $pluralModelLabel = 'Услуги';
+
+    protected static ?string $navigationIcon = 'heroicon-o-squares-plus';
 
     public static function form(Form $form): Form
     {
@@ -35,10 +36,15 @@ class ServiceResource extends Resource
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('price')
-                    ->label('Цена')
+                    ->label('Базовая цена')
                     ->required()
                     ->numeric()
                     ->prefix('₽'),
+                Forms\Components\TextInput::make('duration')
+                    ->label('Длительность (мин)')
+                    ->required()
+                    ->numeric()
+                    ->default(60),
                 Forms\Components\FileUpload::make('image')
                     ->label('Изображение')
                     ->image()
@@ -51,29 +57,35 @@ class ServiceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image')
-                    ->label('Изображение'),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Название')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->label('Описание')
-                    ->limit(50)
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->label('Цена')
-                    ->money('RUB'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Дата создания')
-                    ->dateTime()
+                    ->label('Базовая цена')
+                    ->money('RUB')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('duration')
+                    ->label('Длительность (мин)')
+                    ->sortable(),
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Изображение'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Создано')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Обновлено')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->defaultSort('created_at', 'desc')
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -85,7 +97,7 @@ class ServiceResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PricesRelationManager::class,
         ];
     }
 
